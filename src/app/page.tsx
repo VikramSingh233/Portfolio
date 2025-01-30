@@ -5,7 +5,10 @@ import Link from "next/link";
 
 import Box from "@/components/Box";
 import AboutMe from "@/components/AboutMe";
-import { useState } from "react";
+import WorkExperience from "@/components/WorkExperience";
+import Education from "@/components/Education";
+import ContactForm from "@/components/ContactForm";
+import { useEffect, useState ,useCallback} from "react";
 
 
 
@@ -17,13 +20,36 @@ const projects = [
   { id: 4, title: "Project-4", category: "Data Science",content:"" , image:"",sourceCodeUrl:"#",accessUrl:"#" },
   { id: 5, title: "Project-5", category: "Other",content:"" , image:"",sourceCodeUrl:"#",accessUrl:"#" },
 ];
+const professions = [
+  "Full-Stack Developer", "MERN Stack" ,"Next.js","Machine Learning", "Artificial Intelligence", "Data Science",
+]
 
 export default function Home() {
   
   const [showAboutMe, setShowAboutMe] = useState(false);
+  const [currentProfessionIndex, setCurrentProfessionIndex] = useState(0);
+  const [displayedText, setDisplayedText] = useState("");
+  const [wordIndex, setWordIndex] = useState(0);
+  const words = professions[currentProfessionIndex].split("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const filteredProjects =
     selectedCategory === "All"? projects: projects.filter((project) => project.category === selectedCategory);
+    useEffect(() => {
+      if (wordIndex < words.length) {
+        const timer = setTimeout(() => {
+          setDisplayedText(prev => (prev ? prev + "" + words[wordIndex] : words[wordIndex]));
+          setWordIndex(wordIndex + 1);
+        }, 150); 
+  
+        return () => clearTimeout(timer);
+      } else {
+        setTimeout(() => {
+          setDisplayedText("");
+          setWordIndex(0);
+          setCurrentProfessionIndex((prev) => (prev + 1) % professions.length);
+        }, 500); 
+      }
+    }, [wordIndex, currentProfessionIndex, words]);
 
 
   return (
@@ -40,7 +66,7 @@ export default function Home() {
             height={200}
           />
           <h1 className="font-bold text-black text-3xl mt-4 border-b-4 border-orange-400 pb-1">VIKRAM SINGH</h1>
-          <h3 className="font-bold text-black text-sm mt-3">Full-Stack Developer | MERN Stack & Next.js</h3>
+          <h2 className="font-bold text-black xs:text-lg text-xl  mt-3 h-7"> {displayedText}</h2>
           
           <div className="flex gap-4 mt-3">
             <Link href="https://www.instagram.com/vikram_singh_iconic/">
@@ -151,6 +177,11 @@ export default function Home() {
           />
         ))}
       </div>
+
+
+      <Education />
+      <WorkExperience />
+      <ContactForm />
     </main>
   );
 }

@@ -14,6 +14,7 @@ const Header = () => {
   const [account, setAccount] = useState(false);
   const [userLoggedIn, setUserLoggedIn] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const[sidebar,setSidebar] = useState(false)
 
   const toggleLoginPage = () => setIsModalOpen(!isModalOpen);
 
@@ -188,11 +189,15 @@ const Header = () => {
             className="justify-center items-center w-auto h-full z-20 absolute top-32 -left-2 xs:hidden bg-[#d7c2af00]"
             id="mobile-menu-2"
           >
-            <ul className=" mt-4 font-medium max-h-screen bg-[#d7c2af00] flex flex-col justify-center items-center gap-16  ">
+           <svg  onClick ={() => setSidebar(!sidebar)} className={`h-10 w-10 text-slate-800 ml-3 mb-20 -mt-12 transition-all duration-300 ${sidebar ? "hidden" : "flex"}`}  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="4" y1="6" x2="20" y2="6" />  <line x1="4" y1="12" x2="14" y2="12" />  <line x1="4" y1="18" x2="18" y2="18" /></svg>
+
+           <svg onClick ={() => setSidebar(!sidebar)} className={`h-10 w-10 text-slate-800 ml-3 mb-20 -mt-12 transition-all ${sidebar ? "flex" : "hidden"}`} width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="4" y1="6" x2="20" y2="6" />  <line x1="10" y1="12" x2="20" y2="12" />  <line x1="6" y1="18" x2="20" y2="18" /></svg>
+
+            <ul className={` mt-4 font-medium max-h-screen bg-[#d7c2af00]  flex-col justify-center items-center gap-16 ${sidebar ? "flex" : "hidden"} transition-all duration-300 `}>
               <li>
                 <Link
                   href="/"
-                  className={`flex py-2 pr-2 pl-3 duration-200 ml-0 rounded-full justify-center items-center  text-transparent font-bold gap-1 hover:text-gray-800 lg:p-0`}
+                  className={`flex py-2 pr-2 -ml-4 pl-3 duration-200  rounded-full justify-center items-center  text-transparent font-bold gap-1 hover:text-gray-800 lg:p-0`}
                 >
                   <Image src="https://www.svgrepo.com/show/508090/home-alt.svg" alt="_home" width="35" height="40"></Image>Home
                 </Link>
@@ -229,7 +234,7 @@ const Header = () => {
       {isModalOpen && (
   <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
     <div
-      className="bg-gradient-to-br from-indigo-200 via-slate-700 to-indigo-300 dark:from-slate-900 dark:via-gray-800 dark:to-slate-700 p-6 rounded-xl shadow-2xl relative"
+      className="bg-gradient-to-r from-slate-900 to-slate-700 dark:from-slate-900 dark:via-gray-800 dark:to-slate-700 p-6 rounded-xl shadow-2xl relative"
       onClick={(e) => e.stopPropagation()}
     >
       <h2 className="text-4xl text-white font-bold mb-4 tracking-wide">
