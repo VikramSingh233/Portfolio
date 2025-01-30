@@ -110,13 +110,13 @@ const Header = () => {
     }
   };
   return (
-    <div className="shadow sticky z-50 top-0 bg-[#F4ECE6] ">
+    <div className="shadow sticky z-50 top-0 bg-[#AF9483] ">
 
-      <nav className="px-6 py-2.5 bg-[#d7c2af]">
+      <nav className="px-6 py-2.5 bg-[#AF9483]">
         <div className="flex flex-wrap justify-between items-center  max-w-screen-xl">
         
 
-          <div className=" items-center text-black flex justify-evenly space-x-16 xs:space-x-0  " >
+          <div className=" items-center text-black flex justify-evenly space-x-12 xs:space-x-0  " >
             <div>
               <svg className="h-8 w-8 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" /></svg>
             </div>
@@ -143,7 +143,7 @@ const Header = () => {
               <li>
                 <Link
                   href="/"
-                  className={`block py-2 pr-2 pl-3 duration-200  border-gray-100 ${pathname === "/" ? "text-gray-700 font-bold border-b-2 border-b-orange-500" : "text-black font-bold "
+                  className={`block py-2 pr-2 pl-3 duration-200  border-gray-100 ${pathname === "/" ? "text-gray-700 font-bold border-b-2 border-b-slate-500" : "text-white font-bold "
                     }   hover:text-gray-700 lg:p-0`}
                 >
                   Home
@@ -152,7 +152,7 @@ const Header = () => {
               <li>
                 <Link
                   href="/projects"
-                  className={`block py-2 pr-2 pl-3 duration-200  border-gray-100 ${pathname === "/projects" ? "text-gray-700 font-bold border-b-2 border-b-orange-500" : "text-black font-bold "
+                  className={`block py-2 pr-2 pl-3 duration-200  border-gray-100 ${pathname === "/projects" ? "text-gray-700 font-bold border-b-2 border-b-slate-500" : "text-white font-bold "
                     }  hover:text-gray-700 lg:p-0 `}
                     onClick={handleProjectRouter}
                 >
@@ -163,7 +163,7 @@ const Header = () => {
               <li>
                 <Link
                   href="/contact"
-                  className={`block py-2 pr-2 pl-3 duration-200  border-gray-100 ${pathname === "/contact" ? "text-gray-700 font-bold border-b-2 border-b-orange-500" : "text-black font-bold "
+                  className={`block py-2 pr-2 pl-3 duration-200  border-gray-100 ${pathname === "/contact" ? "text-gray-700 font-bold border-b-2 border-b-slate-500" : "text-white font-bold "
                     }  hover:text-gray-700 lg:p-0`}
                 >
                   Contact
@@ -173,7 +173,7 @@ const Header = () => {
               <li>
                 <Link
                   href="/"
-                  className={`block py-2 pr-2 pl-3 duration-200  border-gray-100 ${pathname === "/resume" ? "text-gray-700 font-bold border-b-2 border-b-orange-500" : "text-black font-bold "
+                  className={`block py-2 pr-2 pl-3 duration-200  border-gray-100 ${pathname === "/resume" ? "text-gray-700 font-bold border-b-2 border-b-slate-500" : "text-white font-bold "
                     }   hover:text-gray-700 lg:p-0`}onClick={handleProjectRouter}
                 >
                   Resume

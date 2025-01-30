@@ -6,7 +6,7 @@ import { FiUser, FiCalendar, FiMapPin, FiMail, FiBook, FiGlobe, FiBriefcase, FiT
 const AboutMe = ({ personalInfo }) => {
   return (
     <div className={`max-w-6xl mx-auto px-4 py-12 `}>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-[#e6ceb9] rounded-2xl shadow-lg p-8 border-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-[#f3d9c2] rounded-2xl shadow-lg p-8">
         {/* Left Column - Personal Details */}
         <div className="space-y-6 border-r-0  md:pr-8 ">
           <h2 className="text-3xl font-bold text-gray-800 mb-6 flex items-center">

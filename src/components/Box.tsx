@@ -6,14 +6,14 @@ import Image from 'next/image'
 
 const Box = ({title , content , image , sourceCodeUrl, accessUrl }) => {
   return (
-    <div className="w-[70%] mx-auto my-10 flex flex-col md:flex-row rounded-lg overflow-hidden shadow-lg bg-[#efe0d7] transition-all duration-300 hover:shadow-xl hover:scale-105">
+    <div className="w-[70%] mx-auto my-10 flex flex-col md:flex-row rounded-lg overflow-hidden shadow-lg bg-[#f6ebe3] transition-all duration-300 hover:shadow-xl hover:scale-102">
      
       <div className="md:w-2/5">
         {image && (
           <Image
             src={image}
             alt={title}
-            className="w-full h-full object-cover transition-transform duration-300 hover:scale-110 hover:animate-pulse"
+            className="w-full h-full object-cover transition-transform duration-300 hover:scale-105 hover:animate-pulse"
             width={500} height={500}
           />
         )}
