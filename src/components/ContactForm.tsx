@@ -1,6 +1,8 @@
 // ContactForm.jsx
 "use client";
 import React, { useState } from 'react';
+import axios from 'axios';
+// import toast from 'react-hot-toast';
 
 
 const ContactForm = () => {
@@ -10,12 +12,20 @@ const ContactForm = () => {
     message: '',
     contactReason: 'professional'
   });
+  const [sending, setSending] = useState(false)
+  const handleSubmit = async (e) => {
 
-  const handleSubmit = (e) => {
     e.preventDefault();
-    // Add your form submission logic here
-    console.log('Form submitted:', formData);
-    // Reset form
+    setSending(true);
+    const response = await axios.post('/api/user/contact', formData);
+    if(response.data.error){
+    
+    // toast.error(response.data.error)
+    }
+    else{setSending(false)}
+    
+    
+    
     setFormData({
       name: '',
       email: '',
@@ -24,8 +34,10 @@ const ContactForm = () => {
     });
   };
 
+  
+
   return (
-    <div className="max-w-4xl mx-auto p-16 xs:p-4 bg-gary-200 rounded-lg shadow-md mb-3">
+    <div className="max-w-5xl mx-auto p-16 xs:p-4 bg-gary-200 rounded-lg shadow-md mb-3">
       <h2 className="text-2xl font-bold mb-6 text-gray-800">Get in Touch</h2>
       
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -39,7 +51,7 @@ const ContactForm = () => {
               id="name"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-4 py-2 border text-black border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               required
             />
           </div>
@@ -53,7 +65,7 @@ const ContactForm = () => {
               id="email"
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-4 py-2 border text-black border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               required
             />
           </div>
@@ -67,7 +79,7 @@ const ContactForm = () => {
             id="contactReason"
             value={formData.contactReason}
             onChange={(e) => setFormData({ ...formData, contactReason: e.target.value })}
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-4 py-2 border border-gray-300 text-black rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
             <option value="professional">Professional Opportunity</option>
             <option value="collaboration">Project Collaboration</option>
@@ -85,7 +97,7 @@ const ContactForm = () => {
             value={formData.message}
             onChange={(e) => setFormData({ ...formData, message: e.target.value })}
             
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-4 py-2 border text-black border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
             required
           ></textarea>
         </div>
@@ -95,7 +107,7 @@ const ContactForm = () => {
             type="submit"
             className="w-full bg-blue-600 text-white py-3 px-6 rounded-md hover:bg-blue-700 transition-colors duration-200 font-medium"
           >
-            Send Message
+            {sending ? "Sending..." : "Send Message"}
           </button>
         </div>
       </form>

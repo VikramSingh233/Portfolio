@@ -19,6 +19,17 @@ const Header = () => {
   const toggleLoginPage = () => setIsModalOpen(!isModalOpen);
 
 
+
+  const handleDownload = () => {
+    // Using native JavaScript download method
+    const link = document.createElement('a');
+    link.href = '/VikramResume.pdf'; // Make sure this file exists in your public folder
+    link.download = 'VikramResume.pdf'; // Set the desired filename
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   const handleSignupChange = (e) => {
     const { name, value } = e.target;
     setUser((prev) => ({ ...prev, [name]: value }));
@@ -39,14 +50,23 @@ const Header = () => {
     }
   };
 
+
+  const handleResumeRouter = () => {
+    if (userLoggedIn) {
+      handleDownload();
+    } else {
+      toggleLoginPage();
+    }
+  };
+
   const Signup = async () => {
     try {
       const response = await axios.post('/api/user/signup', user);
       if (response.data) {
-        toast.success("Signup Successful");
+        // toast.success("Signup Successful");
         setAccount(true);
       } else {
-        toast.error(response.data);
+        // toast.error(response.data);
       }
     } catch (error) {
       handleError(error);
@@ -58,11 +78,11 @@ const Header = () => {
     try {
       const response = await axios.post('/api/user/login', userLogin);
       if (response.data) {
-        toast.success("Login Successful");
+        // toast.success("Login Successful");
         setUserLoggedIn(true); 
         setIsModalOpen(false);
       } else {
-        toast.error(response.data);
+        // toast.error(response.data);
       }
     } catch (error) {
       handleError(error);
@@ -82,6 +102,7 @@ const Header = () => {
     } catch (error: any) {
       setUserLoggedIn(false); 
       toast.error("Not Logged In");
+      console.log(error);
     }
   };
 
@@ -90,7 +111,7 @@ const Header = () => {
     try {
       await axios.get('/api/user/logout');
       setUserLoggedIn(false); 
-      toast.success("Logout Successful");
+      // toast.success("Logout Successful");
     } catch (error: any) {
       toast.error(error.response?.data || "Logout failed");
     }
@@ -107,35 +128,17 @@ const Header = () => {
     } else if (error.request) {
       toast.error("Network error: API not reachable.");
     } else {
-      toast.error("Unexpected error occurred.");
+      // toast.error("Unexpected error occurred.");
     }
   };
   return (
     <div className="shadow sticky z-50 top-0 bg-[#AF9483] ">
 
       <nav className="px-6 py-2.5 bg-[#AF9483]">
-        <div className="flex flex-wrap justify-between items-center  max-w-screen-xl">
+        <div className="flex flex-wrap xs:justify-between justify-end items-center  max-w-screen-xl">
         
 
-          <div className=" items-center text-black flex justify-evenly space-x-12 xs:space-x-0  " >
-            <div>
-              <svg className="h-8 w-8 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" /></svg>
-            </div>
-            <Link
-              href="#"
-              className="hover:text-gray-950 focus:ring-4 focus:ring-gray-300 font-bold rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none text-black"
-            >
-              About Me
-            </Link>
-            <Link
-              href="#"
-              className={`text-white focus:ring-4 focus:ring-orange-300 font-bold rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none ${userLoggedIn ? "bg-red-500" : "bg-gray-800"
-                }`}
-              onClick={userLoggedIn ? logout : toggleLoginPage} // Use userLoggedIn, not account
-            >
-              {userLoggedIn ? "Logout" : "Get Started"}
-            </Link>
-          </div>
+          
           <div
             className=" xs:justify-center xs:items-center xs:w-auto xs:flex hidden "
             id="mobile-menu-2"
@@ -175,12 +178,31 @@ const Header = () => {
                 <Link
                   href="/"
                   className={`block py-2 pr-2 pl-3 duration-200  border-gray-100 ${pathname === "/resume" ? "text-gray-700 font-bold border-b-2 border-b-slate-500" : "text-white font-bold "
-                    }   hover:text-gray-700 lg:p-0`}onClick={handleProjectRouter}
+                    }   hover:text-gray-700 lg:p-0`}onClick={handleResumeRouter}
                 >
                   Resume
                 </Link>
               </li>
             </ul>
+          </div>
+          <div className=" items-center text-black flex xs:justify-center space-x-12 xs:space-x-6  " >
+            {/* <div>
+              <svg className="h-8 w-8 text-black" viewBox="0 0 24 24" fill="none" stroke="currentColor"  >  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" /></svg>
+            </div> */}
+            {/* <Link
+              href="#"
+              className="hover:text-gray-950 focus:ring-4 focus:ring-gray-300 font-bold rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none text-black"
+            >
+              About Me
+            </Link> */}
+            <Link
+              href="#"
+              className={`text-white focus:ring-4 focus:ring-orange-300 font-bold rounded-lg text-sm  px-4  py-2 lg:py-2.5  focus:outline-none ${userLoggedIn ? "bg-red-500" : "bg-gray-800"
+                }`}
+              onClick={userLoggedIn ? logout : toggleLoginPage} // Use userLoggedIn, not account
+            >
+              {userLoggedIn ? "Logout" : "Get Started"}
+            </Link>
           </div>
         </div>
       </nav>
@@ -189,9 +211,9 @@ const Header = () => {
             className="justify-center items-center w-auto h-full z-20 absolute top-32 -left-2 xs:hidden bg-[#d7c2af00]"
             id="mobile-menu-2"
           >
-           <svg  onClick ={() => setSidebar(!sidebar)} className={`h-10 w-10 text-slate-800 ml-3 mb-20 -mt-12 transition-all duration-300 ${sidebar ? "hidden" : "flex"}`}  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="4" y1="6" x2="20" y2="6" />  <line x1="4" y1="12" x2="14" y2="12" />  <line x1="4" y1="18" x2="18" y2="18" /></svg>
+           <svg  onClick ={() => setSidebar(!sidebar)} className={`h-10 w-10 text-slate-800 ml-3 mb-20 -mt-12 transition-all duration-300 ${sidebar ? "hidden" : "flex"}`}  width="24" height="24" viewBox="0 0 24 24"  stroke="currentColor" fill="none" >  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="4" y1="6" x2="20" y2="6" />  <line x1="4" y1="12" x2="14" y2="12" />  <line x1="4" y1="18" x2="18" y2="18" /></svg>
 
-           <svg onClick ={() => setSidebar(!sidebar)} className={`h-10 w-10 text-slate-800 ml-3 mb-20 -mt-12 transition-all ${sidebar ? "flex" : "hidden"}`} width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="4" y1="6" x2="20" y2="6" />  <line x1="10" y1="12" x2="20" y2="12" />  <line x1="6" y1="18" x2="20" y2="18" /></svg>
+           <svg onClick ={() => setSidebar(!sidebar)} className={`h-10 w-10 text-slate-800 ml-3 mb-20 -mt-12 transition-all ${sidebar ? "flex" : "hidden"}`} width="24" height="24" viewBox="0 0 24 24"  stroke="currentColor" fill="none" >  <path stroke="none" d="M0 0h24v24H0z"/>  <line x1="4" y1="6" x2="20" y2="6" />  <line x1="10" y1="12" x2="20" y2="12" />  <line x1="6" y1="18" x2="20" y2="18" /></svg>
 
             <ul className={` mt-4 font-medium max-h-screen bg-[#d7c2af00]  flex-col justify-center items-center gap-16 ${sidebar ? "flex" : "hidden"} transition-all duration-300 `}>
               <li>
@@ -223,7 +245,7 @@ const Header = () => {
               <li>
                 <Link
                   href="/"
-                  className={`flex py-2 pr-2 pl-3 duration-200 rounded-full justify-center items-center  text-transparent font-bold gap-1 hover:text-gray-800 lg:p-0`}onClick={handleProjectRouter}
+                  className={`flex py-2 pr-2 pl-3 duration-200 rounded-full justify-center items-center  text-transparent font-bold gap-1 hover:text-gray-800 lg:p-0`}onClick={handleResumeRouter}
                 >
                  <Image src="https://www.svgrepo.com/show/324376/resume-business-cv-work-job-curriculum-2.svg" alt="_resume" width="30" height="35"></Image>Resume
                 </Link>
@@ -286,7 +308,7 @@ const Header = () => {
         </div>
 
         {/* OAuth Buttons */}
-        <div className="flex justify-center space-x-3 mt-4 w-full gap-5">
+        {/* <div className="flex justify-center space-x-3 mt-4 w-full gap-5">
           <button
             type="button"
             className="flex gap-2 justify-center items-center px-4 py-2 text-sm font-bold rounded-md bg-blue-600 hover:bg-blue-700 transition-colors text-white dark:bg-gray-700 dark:hover:bg-gray-600 w-1/2"
@@ -305,7 +327,7 @@ const Header = () => {
               <path d="M9 19c-4.286 1.35-4.286-2.55-6-3m12 5v-3.5c0-1 .099-1.405-.5-2 2.791-.3 5.5-1.366 5.5-6.04a4.567 4.567 0 0 0 -1.333 -3.21 4.192 4.192 0 00-.08-3.227s-1.05-.3-3.476 1.267a12.334 12.334 0 0 0 -6.222 0C6.462 2.723 5.413 3.023 5.413 3.023a4.192 4.192 0 0 0 -.08 3.227A4.566 4.566 0 004 9.486c0 4.64 2.709 5.68 5.5 6.014-.591.589-.56 1.183-.5 2V21" />
             </svg> Github
           </button>
-        </div>
+        </div> */}
 
         
         <div className="flex justify-center space-x-2 mt-4 gap-2">
