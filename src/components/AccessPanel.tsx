@@ -40,7 +40,7 @@ const AccessPanel = () => {
       <button
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        onClick={handleProjectRouter}
+        
         className={`px-8 py-3 rounded-full font-semibold transition-all transform ${
           isHovered ? 'scale-105 shadow-lg' : 'scale-100 shadow-md'
         } ${
