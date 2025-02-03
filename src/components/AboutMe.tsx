@@ -1,11 +1,34 @@
-"use client"
+"use client";
 
 import React from 'react';
 import { FiUser, FiCalendar, FiMapPin, FiMail, FiBook, FiGlobe, FiBriefcase, FiTarget } from 'react-icons/fi';
 
-const AboutMe = ({ personalInfo }) => {
+// Define the type for personalInfo
+interface PersonalInfo {
+  name: string;
+  email: string;
+  location?: string;
+  age: string;
+  city: string;
+  degree: string;
+  website: string;
+  experience: string;
+  profession: string;
+  goal: string;
+  specialization: string;
+  college: string;
+  birthdate: string;
+  bio: string;
+}
+
+// Define the type for the component props
+interface AboutMeProps {
+  personalInfo: PersonalInfo;
+}
+
+const AboutMe = ({ personalInfo }: AboutMeProps) => {
   return (
-    <div className={`max-w-6xl mx-auto px-4 py-12 `}>
+    <div className={`max-w-6xl mx-auto px-4 py-12`}>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-[#f3d9c2] rounded-2xl shadow-lg p-8">
         {/* Left Column - Personal Details */}
         <div className="space-y-6 border-r-0  md:pr-8 ">
@@ -15,12 +38,12 @@ const AboutMe = ({ personalInfo }) => {
           </h2>
 
           <div className="space-y-4">
-            <DetailItem icon={<FiCalendar />} title="Age" value={personalInfo.age}  />
-            <DetailItem icon={<FiMapPin />} title="Location" value={personalInfo.city}   />
+            <DetailItem icon={<FiCalendar />} title="Age" value={personalInfo.age} />
+            <DetailItem icon={<FiMapPin />} title="Location" value={personalInfo.city} />
             <DetailItem icon={<FiMail />} title="Email" value={personalInfo.email} link={`mailto:${personalInfo.email}`} />
-            <DetailItem icon={<FiBook />} title="Education" value={personalInfo.degree}  />
+            <DetailItem icon={<FiBook />} title="Education" value={personalInfo.degree} />
             <DetailItem icon={<FiGlobe />} title="Website" value={personalInfo.website} link={personalInfo.website} />
-            <DetailItem icon={<FiBriefcase />} title="Experience" value={personalInfo.experience}   />
+            <DetailItem icon={<FiBriefcase />} title="Experience" value={personalInfo.experience} />
           </div>
         </div>
 
@@ -32,7 +55,7 @@ const AboutMe = ({ personalInfo }) => {
           </div>
 
           <div className="space-y-6">
-            <SectionBlock 
+            <SectionBlock
               icon={<FiTarget className="text-xl bg-orange-50" />}
               title="Career Goals"
               content={personalInfo.goal}
@@ -69,7 +92,14 @@ const AboutMe = ({ personalInfo }) => {
 };
 
 // Reusable Detail Item Component
-const DetailItem = ({ icon, title, value, link }) => (
+interface DetailItemProps {
+  icon: JSX.Element;
+  title: string;
+  value: string;
+  link?: string;
+}
+
+const DetailItem = ({ icon, title, value, link }: DetailItemProps) => (
   <div className="flex items-center space-x-4 group">
     <div className="p-2 bg-blue-100 rounded-lg text-[#ff8d29] group-hover:bg-blue-600 group-hover:text-white transition-colors">
       {icon}
@@ -88,7 +118,13 @@ const DetailItem = ({ icon, title, value, link }) => (
 );
 
 // Reusable Section Block Component
-const SectionBlock = ({ icon, title, content }) => (
+interface SectionBlockProps {
+  icon: JSX.Element;
+  title: string;
+  content: string;
+}
+
+const SectionBlock = ({ icon, title, content }: SectionBlockProps) => (
   <div className="bg-gray-50 rounded-xl p-6">
     <div className="flex items-center mb-3">
       <span className="text-[#ff8d29] mr-2">{icon}</span>
