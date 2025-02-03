@@ -99,7 +99,7 @@ const Header = () => {
       } else {
         setUserLoggedIn(false);
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       setUserLoggedIn(false); 
       toast.error("Not Logged In");
       console.log(error);
@@ -112,8 +112,9 @@ const Header = () => {
       await axios.get('/api/user/logout');
       setUserLoggedIn(false); 
       // toast.success("Logout Successful");
-    } catch (error: any) {
-      toast.error(error.response?.data || "Logout failed");
+    } catch (error: unknown) {
+      // toast.error(.response?.data || "Logout failed");
+      console.log(error);
     }
   };
 
@@ -122,11 +123,11 @@ const Header = () => {
   }, []);
 
 
-  const handleError = (error: any) => {
-    if (error.response) {
-      toast.error(error.response.data.message || "Request failed");
-    } else if (error.request) {
-      toast.error("Network error: API not reachable.");
+  const handleError = (error: unknown) => {
+    if ( (error as Error)) {
+      console.log((error as Error));
+      // toast.error(error.response.data.message || "Request failed");
+    
     } else {
       // toast.error("Unexpected error occurred.");
     }

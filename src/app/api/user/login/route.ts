@@ -58,8 +58,8 @@ export async function POST(request:NextRequest){
         response.cookies.set("token",token,{httpOnly:true,secure: process.env.NODE_ENV === "production",})
 
         return response;
-    } catch (error:any) {
-        return NextResponse.json({error:error.message,status:500});
+    } catch (error:unknown) {
+        return NextResponse.json({error:(error as Error).message,status:500});
     }
 }
 

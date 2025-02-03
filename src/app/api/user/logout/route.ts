@@ -6,7 +6,7 @@ export async function GET() {
        
         response.cookies.set("token", "", { httpOnly: true, expires: new Date(0) });
         return response;
-    } catch (error:any) {
+    } catch (error:unknown) {
         console.error("Logout failed", error);
         return NextResponse.json({ error: "Logout failed" }, { status: 500 });
     }

@@ -56,12 +56,12 @@ export async function POST(request:NextRequest){
          
 
     
-    } catch (error:any) {
+    } catch (error:unknown) {
         return NextResponse.json({
             success:false,
             message:"Login Unsuccessful",
             status:500,
-            error:error.message
+            error:(error as Error).message
         })
     }
 }
