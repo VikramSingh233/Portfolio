@@ -13,9 +13,9 @@ const ContactForm = () => {
     contactReason: 'professional'
   });
   const [sending, setSending] = useState(false)
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e:unknown) => {
 
-    e.preventDefault();
+    (e as Event).preventDefault();
     setSending(true);
     const response = await axios.post('/api/user/contact', formData);
     if(response.data.error){
