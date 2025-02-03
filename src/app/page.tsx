@@ -212,7 +212,7 @@ export default function Home() {
             content={project.content}
             image={project.image}
             sourceCodeUrl={project.sourceCodeUrl}
-            accessUrl={project.accessUrl}
+            
           />
         ))}
       </div>
