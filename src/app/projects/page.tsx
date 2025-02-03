@@ -9,7 +9,7 @@ import Box from '@/components/Box';
 
 
 const projects = [
-  { id: 1, title: "Question Bank", category: "Full Stack",content:"A Question Bank Website where you can manage all your questions and answers of differnt topics , different levels of difficulty and of different subjects . There is a special feature where you can automatically generate a pdf for a question paper with some simple instructions." , image:"https://images.squarespace-cdn.com/content/v1/62d3bbd1faeb0e33ddbad6da/dd7a63b3-819b-4751-9279-bd6fe95ef9f1/Question+Bank.png",sourceCodeUrl:"https://github.com/VikramSingh233/QuestionBank-Website",accessUrl:"/blankPage" },
+  { id: 1, title: "Question Bank", category: "Full Stack",content:"A Question Bank Website where you can manage all your questions and answers of differnt topics , different levels of difficulty and of different subjects . There is a special feature where you can automatically generate a pdf for a question paper with some simple instructions." , image:"https://images.squarespace-cdn.com/content/v1/62d3bbd1faeb0e33ddbad6da/dd7a63b3-819b-4751-9279-bd6fe95ef9f1/Question+Bank.png",sourceCodeUrl:"https://github.com/VikramSingh233/QuestionBank-Website" },
   // { id: 2, title: "Project-2", category: "Machine Learning",content:"" , image:"",sourceCodeUrl:"#",accessUrl:"#" },
   // { id: 3, title: "Project-3", category: "AI",content:"" , image:"",sourceCodeUrl:"#",accessUrl:"#" },
   // { id: 4, title: "Project-4", category: "Data Science",content:"" , image:"",sourceCodeUrl:"#",accessUrl:"#" },
