@@ -1,44 +1,51 @@
 "use client";
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+
+interface User {
+  username: string;
+  email: string;
+  password: string;
+}
+
+interface UserLogin {
+  email: string;
+  password: string;
+}
+
 const Header = () => {
   const pathname = usePathname();
   const router = useRouter();
-  const [user, setUser] = useState({ username: "", email: "", password: "" });
-  const [userLogin, setUserLogin] = useState({ email: "", password: "" });
+  const [user, setUser] = useState<User>({ username: "", email: "", password: "" });
+  const [userLogin, setUserLogin] = useState<UserLogin>({ email: "", password: "" });
   const [account, setAccount] = useState(false);
-  const [userLoggedIn, setUserLoggedIn] = useState(false)
+  const [userLoggedIn, setUserLoggedIn] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const[sidebar,setSidebar] = useState(false)
+  const [sidebar, setSidebar] = useState(false);
 
   const toggleLoginPage = () => setIsModalOpen(!isModalOpen);
 
-
-
   const handleDownload = () => {
-    // Using native JavaScript download method
     const link = document.createElement('a');
-    link.href = '/VikramResume.pdf'; // Make sure this file exists in your public folder
-    link.download = 'VikramResume.pdf'; // Set the desired filename
+    link.href = '/VikramResume.pdf';
+    link.download = 'VikramResume.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
 
-  const handleSignupChange = (e) => {
+  const handleSignupChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setUser((prev) => ({ ...prev, [name]: value }));
+    setUser(prev => ({ ...prev, [name]: value }));
   };
 
-
-  const handleLoginChange = (e) => {
+  const handleLoginChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setUserLogin((prev) => ({ ...prev, [name]: value }));
+    setUserLogin(prev => ({ ...prev, [name]: value }));
   };
 
 
@@ -93,16 +100,11 @@ const Header = () => {
 
   const UserLoginOrNot = async () => {
     try {
-      const response = await axios.get('/api/user/me');
-      if (response.data.success) {
-        setUserLoggedIn(true);
-      } else {
-        setUserLoggedIn(false);
-      }
-    } catch (error: unknown) {
-      setUserLoggedIn(false); 
-      toast.error("Not Logged In");
-      console.log(error);
+      const response = await axios.get<{ success: boolean }>('/api/user/me');
+      setUserLoggedIn(response.data.success);
+    } catch (error) {
+      setUserLoggedIn(false);
+      handleError(error);
     }
   };
 
@@ -120,16 +122,15 @@ const Header = () => {
 
   useEffect(() => {
     UserLoginOrNot(); 
-  }, []);
-
+  },);
 
   const handleError = (error: unknown) => {
-    if ( (error as Error)) {
-      console.log((error as Error));
-      // toast.error(error.response.data.message || "Request failed");
-    
+    if (axios.isAxiosError(error)) {
+      toast.error(error.response?.data?.message || "Request failed");
+    } else if (error instanceof Error) {
+      toast.error(error.message);
     } else {
-      // toast.error("Unexpected error occurred.");
+      toast.error("Unexpected error occurred.");
     }
   };
   return (

@@ -1,8 +1,16 @@
-// EducationSection.jsx
 "use client";
 import React from 'react';
 
-const EducationEntry = ({ type, institution, duration, description, focus }) => {
+// Define type for education entry props
+interface EducationEntryProps {
+  type: string;
+  institution: string;
+  duration: string;
+  description?: string; // Optional
+  focus?: string;       // Optional
+}
+
+const EducationEntry = ({ type, institution, duration, description, focus }: EducationEntryProps) => {
   return (
     <div className="mb-6 ml-4">
       <div className="absolute w-3 h-3 bg-orange-200 rounded-full mt-1.5 -left-1.5 border border-white"></div>
@@ -15,7 +23,8 @@ const EducationEntry = ({ type, institution, duration, description, focus }) => 
 };
 
 const Education = () => {
-  const educationData = [
+  // Type the education data array
+  const educationData: EducationEntryProps[] = [
     {
       type: 'Secondary Education',
       institution: 'Saruswati Vidya Mandir Deoria Utter Pradesh',
@@ -28,7 +37,6 @@ const Education = () => {
       duration: '2023-Present',
       focus: 'Computer Science'
     },
-
   ];
 
   return (
@@ -36,7 +44,14 @@ const Education = () => {
       <h2 className="text-2xl font-bold mb-6 text-black">Education</h2>
       <div className="relative pl-8 border-l-2 border-orange-200">
         {educationData.map((edu, index) => (
-          <EducationEntry key={index} {...edu} />
+          <EducationEntry
+            key={index}
+            type={edu.type}
+            institution={edu.institution}
+            duration={edu.duration}
+            description={edu.description}
+            focus={edu.focus}
+          />
         ))}
       </div>
     </div>

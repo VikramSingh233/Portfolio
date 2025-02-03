@@ -1,7 +1,14 @@
-import nodemailer from "nodemailer";
+import * as nodemailer from "nodemailer";
+import type { SentMessageInfo } from "nodemailer";
 
+interface MailOptions {
+  email: string;
+  contactReason: string;
+  message: string;
+  name: string;
+}
 
-const sendMail = async({email,contactReason,message,name})=>{
+const sendMail = async ({ email, contactReason, message, name }: MailOptions): Promise<SentMessageInfo> => {
     try {
         const transport  = nodemailer.createTransport({
             host: 'smtp.gmail.com',
@@ -55,7 +62,7 @@ const sendMail = async({email,contactReason,message,name})=>{
 
 
         const mailResponse = await transport.sendMail(mailOptions);
-        return mailResponse
+        return mailResponse;
     } catch (error:unknown) {
         throw new Error((error as Error).message)
     }

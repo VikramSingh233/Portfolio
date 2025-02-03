@@ -1,8 +1,15 @@
-// WorkExperience.jsx
 "use client";
 import React from 'react';
 
-const WorkEntry = ({ company, duration, project, description }) => {
+// Define type for work entry props
+interface WorkEntryProps {
+  company: string;
+  duration: string;
+  project: string;
+  description: string;
+}
+
+const WorkEntry = ({ company, duration, project, description }: WorkEntryProps) => {
   return (
     <div className="mb-6 ml-4">
       <div className="absolute w-3 h-3 bg-blue-200 rounded-full mt-1.5 -left-1.5 border border-white"></div>
@@ -17,7 +24,8 @@ const WorkEntry = ({ company, duration, project, description }) => {
 };
 
 const WorkExperience = () => {
-  const workData = [
+  // Type the work data array
+  const workData: WorkEntryProps[] = [
     {
       company: 'Intern at Cognifyz',
       duration: 'Jan-2025 - Present',
@@ -37,7 +45,13 @@ const WorkExperience = () => {
       <h2 className="text-2xl font-bold mb-6 text-black">Work Experience</h2>
       <div className="relative pl-2 border-l-2 border-blue-200">
         {workData.map((work, index) => (
-          <WorkEntry key={index} {...work} />
+          <WorkEntry
+            key={index}
+            company={work.company}
+            duration={work.duration}
+            project={work.project}
+            description={work.description}
+          />
         ))}
       </div>
     </div>
