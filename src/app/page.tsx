@@ -1,9 +1,6 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { EventEmitter } from "events";
-EventEmitter.defaultMaxListeners = 20;
-
 
 import Box from "@/components/Box";
 import AboutMe from "@/components/AboutMe";

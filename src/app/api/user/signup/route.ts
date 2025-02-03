@@ -29,7 +29,7 @@ export async function POST(request:NextRequest){
             })
          }
 
-         const hashPassword = async (password:any) => {
+         const hashPassword = async (password:unknown) => {
             const salt = await bcrypt.genSalt(10); // Generate a salt with 10 rounds
             const hashedPassword = await bcrypt.hash(password, salt);
             return hashedPassword;

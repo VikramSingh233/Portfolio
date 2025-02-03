@@ -15,7 +15,7 @@ const projects = [
   // { id: 4, title: "Project-4", category: "Data Science",content:"" , image:"",sourceCodeUrl:"#",accessUrl:"#" },
   // { id: 5, title: "Project-5", category: "Other",content:"" , image:"",sourceCodeUrl:"#",accessUrl:"#" },
 ];
-const page = () => {
+const Page = () => {
 
     const [selectedCategory, setSelectedCategory] = useState("All");
     const filteredProjects =
@@ -59,4 +59,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

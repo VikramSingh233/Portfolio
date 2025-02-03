@@ -3,10 +3,10 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
 
 
-const Box = ({title , content , image , sourceCodeUrl, accessUrl }) => {
+
+const Box = ({title , content , image , sourceCodeUrl }) => {
   return (
     <div className="w-[70%] mx-auto my-10 flex flex-col md:flex-row rounded-lg overflow-hidden shadow-lg bg-[#f6ebe3] transition-all duration-300 hover:shadow-xl hover:scale-102">
      
